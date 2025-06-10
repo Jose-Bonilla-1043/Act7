@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
 import 'package:myapp/pages/add_name_page.dart';
 import 'package:myapp/pages/home_page.dart';
 import 'firebase_options.dart';
@@ -18,10 +19,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: "/",
-      title: "Mi CRUD",
+      title: "Gestión de Productos",
       routes: {
-        "/": (context) => Home(),
-        "/add": (context) => AddNamePage(),
+        "/": (context) => const HomePage(),
+        "/add": (context) => const AddProductPage(),
       },
     );
   }

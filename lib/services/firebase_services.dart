@@ -1,22 +1,28 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 FirebaseFirestore db = FirebaseFirestore.instance;
 
-Future<List<Map<String, dynamic>>> getPeople() async {
-    List<Map<String, dynamic>> people = [];
-    CollectionReference collectionReferencePeople = db.collection('people');
+Future<List<Map<String, dynamic>>> getProducts() async {
+  List<Map<String, dynamic>> products = [];
+  QuerySnapshot queryProducts = await db.collection('productos').get();
 
-    QuerySnapshot queryPeople = await collectionReferencePeople.get();
+  for (var documento in queryProducts.docs) {
+    Map<String, dynamic> data = documento.data() as Map<String, dynamic>;
+    data['id'] = documento.id;
+    products.add(data);
+  }
 
-    for (var documento in queryPeople.docs) {
-      people.add(documento.data() as Map<String, dynamic>);
-    }
-
-    return people;
+  return products;
 }
 
-Future<void> addPeople(String name) async {
-    await db.collection('people').add({'name': name});
+Future<void> addProduct(Map<String, dynamic> productData) async {
+  await db.collection('productos').add(productData);
 }
 
+Future<void> updateProduct(String productId, Map<String, dynamic> productData) async {
+  await db.collection('productos').doc(productId).update(productData);
+}
+
+Future<void> deleteProduct(String productId) async {
+  await db.collection('productos').doc(productId).delete();
+}
