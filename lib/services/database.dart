@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-FirebaseFirestore db = FirebaseFirestore.instance;
+final FirebaseFirestore db = FirebaseFirestore.instance;
 
 Future<List<Map<String, dynamic>>> getProducts() async {
   List<Map<String, dynamic>> products = [];
